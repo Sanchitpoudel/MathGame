@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors, unused_import
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:mathgame/calculatorpart.dart';
 import 'package:mathgame/const.dart';
+import 'package:mathgame/questionpart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,11 +27,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.deepPurple,
           ),
           //question
-          Expanded(
-            child: Container(
-              child: Center(child: Text('1 + 1 = ? ', style: whiteTextStyle)),
-            ),
-          ),
+          Question(),
           Calculator()
           //calculator
         ],

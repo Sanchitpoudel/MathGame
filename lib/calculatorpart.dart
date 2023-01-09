@@ -32,16 +32,19 @@ class _CalculatorState extends State<Calculator> {
   Widget build(BuildContext context) {
     return Expanded(
         flex: 2,
-        child: GridView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: numberPad.length,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-          itemBuilder: (context, index) {
-            return NumberKey(
-              child: numberPad[index],
-            );
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: numberPad.length,
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+            itemBuilder: (context, index) {
+              return NumberKey(
+                child: numberPad[index],
+              );
+            },
+          ),
         ));
   }
 }
