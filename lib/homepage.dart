@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:mathgame/calculatorpart.dart';
 import 'package:mathgame/const.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,19 +26,10 @@ class _HomePageState extends State<HomePage> {
           //question
           Expanded(
             child: Container(
-              child: Center(
-                  child: Text(
-                '1 + 1 = ? ',
-                style: whiteTextStyle
-              )),
+              child: Center(child: Text('1 + 1 = ? ', style: whiteTextStyle)),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              color: Colors.green,
-            ),
-          ),
+          Calculator()
           //calculator
         ],
       ),
