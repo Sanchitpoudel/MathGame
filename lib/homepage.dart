@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:mathgame/const.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,15 +21,18 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 150,
             color: Colors.deepPurple,
-
           ),
           //question
           Expanded(
             child: Container(
-              child: Center(child: Text('1 + 1 = ? ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.white),)),
+              child: Center(
+                  child: Text(
+                '1 + 1 = ? ',
+                style: whiteTextStyle
+              )),
             ),
           ),
-           Expanded(
+          Expanded(
             flex: 2,
             child: Container(
               color: Colors.green,
