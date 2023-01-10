@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class NumberKey extends StatefulWidget {
+class NumberKey extends StatelessWidget {
   final String child;
   final VoidCallback onTap;
 
@@ -10,26 +10,21 @@ class NumberKey extends StatefulWidget {
     required this.onTap,
   }):super(key: key);
 
-  @override
-  State<NumberKey> createState() => _NumberKeyState();
-}
-
-class _NumberKeyState extends State<NumberKey> {
   var buttonColor = Colors.deepPurple[600];
 
   @override
   Widget build(BuildContext context) {
-    if (widget.child == 'C') {
+    if (child == 'C') {
       buttonColor = Colors.green[400];
-    } else if (widget.child == 'DEL') {
+    } else if (child == 'DEL') {
       buttonColor = Colors.red[400];
-    } else if (widget.child == "=") {
+    } else if (child == "=") {
       buttonColor = Colors.deepPurple[900];
     }
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: GestureDetector(
-        onTap: () => widget.onTap,
+        onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
             color: buttonColor,
@@ -37,7 +32,7 @@ class _NumberKeyState extends State<NumberKey> {
           ),
           child: Center(
               child: Text(
-            widget.child,
+            child,
             style: TextStyle(color: Colors.white, fontSize: 18),
           )),
         ),

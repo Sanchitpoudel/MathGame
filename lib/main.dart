@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mathgame/test.dart';
 
 import 'homepage.dart';
 
@@ -12,9 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-
-    );
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+        routes: <String, WidgetBuilder>{
+          '/landingpage': (BuildContext context) => new MyApp(),
+          '/test': (BuildContext context) => new Test(),
+        });
   }
 }
