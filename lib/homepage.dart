@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 
+import 'dart:math';
 import 'dart:ui';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';
 import 'package:mathgame/const.dart';
 import 'package:mathgame/util/number_key.dart';
+import 'package:mathgame/util/result_message.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,6 +40,9 @@ class _HomePageState extends State<HomePage> {
   //number A, number B
   int num1 = 1;
   int num2 = 1;
+  int points = 0;
+  String displayResult = '';
+  var reslutColor=Colors.deepPurple;
 
   void buttonTapped(String button) {
     setState(() {
@@ -58,42 +64,36 @@ class _HomePageState extends State<HomePage> {
   void checkResult() {
     if (num1 + num2 == int.parse(userAnswer)) {
       showDialog(
+        context: context,
+        builder: ((context) {
+          return ResultMessage(
+            icon: Icons.arrow_forward,
+            message: 'Correct!',
+            onTap: goToNextQuestion,
+          );
+        }),
+      );
+      points = points + 10;
+      displayResult = '+10';
+      reslutColor = Colors.green;
+    } else {
+      showDialog(
           context: context,
           builder: ((context) {
-            return AlertDialog(
-              backgroundColor: Colors.deepPurple,
-              content: Container(
-                height: 200,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'Correct!',
-                      style: whiteTextStyle,
-                    ),
-                    GestureDetector(
-                      onTap: goToNextQuestion,
-                      child: Container(
-                        margin: EdgeInsets.all(18),
-                        decoration: BoxDecoration(
-                            color: Colors.deepPurple[300],
-                            borderRadius: BorderRadius.circular(2)),
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+            return ResultMessage(
+              icon: Icons.rotate_left,
+              message: 'Try again!',
+              onTap: goBackToQuestion,
             );
           }));
-    } else {
-      print('Incorrect');
+      points = points - 10;
+      displayResult = '-10';
+      reslutColor = Colors.red;
     }
   }
+
   //create random numbers
+  var randomNumber = Random();
 
   void goToNextQuestion() {
     Navigator.of(context).pop();
@@ -103,6 +103,12 @@ class _HomePageState extends State<HomePage> {
     });
 
     //create a new question
+    num1 = randomNumber.nextInt(10);
+    num2 = randomNumber.nextInt(10);
+  }
+
+  void goBackToQuestion() {
+    Navigator.of(context).pop();
   }
 
   @override
@@ -111,12 +117,34 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.deepPurple[300],
       body: Column(
         children: [
-          //level progress
           Container(
-            height: 150,
-            color: Colors.deepPurple,
-          ),
-          //question
+              height: 150,
+              color: Colors.deepPurple,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Total Points: ' + points.toString(),
+                      style: GoogleFonts.montserrat(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "( " + displayResult +")",
+                      style: GoogleFonts.montserrat(
+                          color: reslutColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              )),
           Expanded(
             child: Container(
               child: Center(
@@ -159,7 +187,6 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               )),
-          //calculator
         ],
       ),
     );

@@ -10,7 +10,7 @@ class NumberKey extends StatelessWidget {
     required this.onTap,
   }):super(key: key);
 
-  var buttonColor = Colors.deepPurple[600];
+  var buttonColor = Colors.deepPurple[800];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,9 @@ class NumberKey extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: GestureDetector(
         onTap: onTap,
-        child: Container(
+      
+        child: AnimatedContainer(
+          duration: Duration(),
           decoration: BoxDecoration(
             color: buttonColor,
             borderRadius: BorderRadius.circular(8),
